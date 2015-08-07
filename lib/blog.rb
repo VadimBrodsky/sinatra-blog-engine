@@ -23,9 +23,20 @@ class Blog < Sinatra::Base
     # generate the slug
     article.slug = Filename.basename(file, '.md')
 
-    # set up the route
+    # add article to list of articles
+    articles << article
+
+    # set up the article route
     get "/#{article.slug}" do
       erb :post, locals: { article: article }
     end
+  end
+
+  # sort articles by date, new first
+  articles.sort_by! { |article| article.date }
+  articles.reverse!
+
+  get '/' do
+    erb :index
   end
 end
