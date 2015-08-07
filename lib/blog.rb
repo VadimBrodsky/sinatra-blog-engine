@@ -39,4 +39,12 @@ class Blog < Sinatra::Base
   get '/' do
     erb :index
   end
+
+  get '/js/jquery.js' do
+    redirect "#{root}/public/bower_components/jquery/dist/jquery.min.js"
+  end
+
+  get '/js/jquery.timeago.js' do
+    redirect "#{root}/public/bower_components/jquery-timeago/jquery.timeago.js"
+  end
 end
