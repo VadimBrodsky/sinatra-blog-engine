@@ -1,10 +1,13 @@
 require 'sinatra/base'
 require 'ostruct'
+require 'yaml'
 require 'time'
 
 class Blog < Sinatra::Base
   # generate absolute path
   set :root, File.expand_path('../../', __FILE__)
+  set :articles, []
+  set :app_file, __FILE__
 
   # loop through all articles
   Dir.glob "#{root}/articles/*.md" do |file|
@@ -21,7 +24,7 @@ class Blog < Sinatra::Base
     article.content = content
 
     # generate the slug
-    article.slug = Filename.basename(file, '.md')
+    article.slug = File.basename(file, '.md')
 
     # add article to list of articles
     articles << article
@@ -41,10 +44,10 @@ class Blog < Sinatra::Base
   end
 
   get '/js/jquery.js' do
-    redirect "#{root}/public/bower_components/jquery/dist/jquery.min.js"
+    send_file File.join(settings.public_folder, "/bower_components/jquery/dist/jquery.min.js")
   end
 
   get '/js/jquery.timeago.js' do
-    redirect "#{root}/public/bower_components/jquery-timeago/jquery.timeago.js"
+    send_file File.join(settings.public_folder, "/bower_components/jquery-timeago/jquery.timeago.js")
   end
 end
