@@ -1,9 +1,12 @@
 require 'sinatra/base'
+require 'github_hook'
 require 'ostruct'
 require 'yaml'
 require 'time'
 
 class Blog < Sinatra::Base
+  use GithubHook
+  
   # generate absolute path
   set :root, File.expand_path('../../', __FILE__)
   set :articles, []
