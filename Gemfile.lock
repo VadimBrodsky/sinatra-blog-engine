@@ -4,6 +4,8 @@ GEM
     daemons (1.2.3)
     eventmachine (1.0.8)
     rack (1.6.4)
+    rack-cache (1.2)
+      rack (>= 0.4)
     rack-protection (1.5.3)
       rack
     rdiscount (2.1.8)
@@ -21,6 +23,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rack
+  rack-cache
   rdiscount
   sinatra
   thin
